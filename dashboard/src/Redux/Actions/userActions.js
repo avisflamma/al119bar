@@ -5,7 +5,7 @@ import {
   USER_LOGOUT,
 } from "../Constants/UserContants";
 import axios from "axios";
-import Toast, { toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 // LOGIN
 export const login = (email, password) => async (dispatch) => {
@@ -45,12 +45,16 @@ export const login = (email, password) => async (dispatch) => {
 
     localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    if (message === "Not authorized, token failed") {
+      dispatch(logout());
+    }
     dispatch({
       type: USER_LOGIN_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: message,
     });
   }
 };
