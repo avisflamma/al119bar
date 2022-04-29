@@ -93,4 +93,24 @@ productRoute.post(
     }
   })
 );
+
+
+// DELETE ADMIN PRODUCT
+productRoute.delete(
+  "/:id",
+  protect,
+  admin,
+  asyncHandler(async (req, res) => {
+    const product = await Product.findById(req.params.id);
+    if (product) {
+      /* res.json(product); */
+      await product.remove();
+      res.json({message: "Product deleted"})
+    } else {
+      res.status(404);
+      throw new Error("Product not Found");
+    }
+  })
+);
+
 export default productRoute;
