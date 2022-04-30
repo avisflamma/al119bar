@@ -6,7 +6,10 @@ import {
     PRODUCT_CREATE_REQUEST,
     PRODUCT_CREATE_SUCCESS,
     PRODUCT_CREATE_FAIL,
-    PRODUCT_CREATE_RESET
+    PRODUCT_CREATE_RESET,
+    PRODUCT_EDIT_REQUEST,
+    PRODUCT_EDIT_SUCCESS,
+    PRODUCT_EDIT_FAIL
 } from "../Constants/ProductConstants";
   
  
@@ -25,7 +28,7 @@ export const productListReducer = (state = {products : []}, action) => {
 };
 
 // DELETE ADMIN PRODUCT
-export const productDelteReducer = (state = {}, action) => {
+export const productDeleteReducer = (state = {}, action) => {
   switch (action.type) {
     case PRODUCT_DELETE_REQUEST:
       return { loading: true};
@@ -51,6 +54,25 @@ export const productCreateReducer = (state = {}, action) => {
       return { loading: false, error: action.payload };
     case PRODUCT_CREATE_RESET:
       return {};
+    default:
+      return state;
+  }
+};
+
+
+
+// EDIT ADMIN PRODUCT
+export const productEditReducer = (
+  state = { product: { reviews: [] } },
+  action
+) => {
+  switch (action.type) {
+    case PRODUCT_EDIT_REQUEST:
+      return { ...state, loading: true };
+    case PRODUCT_EDIT_SUCCESS:
+      return { loading: false, product: action.payload };
+    case PRODUCT_EDIT_FAIL:
+      return { loading: false, error: action.payload };
     default:
       return state;
   }

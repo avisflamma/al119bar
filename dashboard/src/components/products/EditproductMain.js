@@ -1,9 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Toast from "./../LoadingError/Toast";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { editProduct } from "../../Redux/Actions/ProductActions";
+
+/* const Toastobjects = {
+  pauseOnFocusLoss: false,
+  draggable: false,
+  pauseOnHover: false,
+  autoClose: 2000,
+}; */
 
 const EditProductMain = (props) => {
   const { productId } = props;
+
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [image, setImage] = useState("");
+  const [countInStock, setCountInStock] = useState(0);
+  const [description, setDescription] = useState("");
+
+  const dispatch = useDispatch();
+
+  const productEdit = useSelector((state) => state.productEdit);
+  const {loading, error, product} = productEdit;
+
+  useEffect( () => {
+    if(!product.name || product._id !== productId){
+      dispatch(editProduct(productId));
+    }else{
+      setName(product.name);
+      setPrice(product.price);
+      setImage(product.image);
+      setCountInStock(product.countInStock);
+      setDescription(product.description);
+    }
+  }, [product, dispatch, productId])
 
   return (
     <>
@@ -35,7 +67,8 @@ const EditProductMain = (props) => {
                       className="form-control"
                       id="product_title"
                       required
-                      value={productId.name}
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                     />
                   </div>
                   <div className="mb-4">
@@ -48,7 +81,8 @@ const EditProductMain = (props) => {
                       className="form-control"
                       id="product_price"
                       required
-                      value={productId.price}
+                      value={price}
+                      onChange={(e) => setPrice(e.target.value)}
                     />
                   </div>
                   <div className="mb-4">
@@ -61,7 +95,8 @@ const EditProductMain = (props) => {
                       className="form-control"
                       id="product_price"
                       required
-                      value={productId.countInStock}
+                      value={countInStock}
+                      onChange={(e) => setCountInStock(e.target.value)}
                     />
                   </div>
                   <div className="mb-4">
@@ -71,7 +106,8 @@ const EditProductMain = (props) => {
                       className="form-control"
                       rows="7"
                       required
-                      value={productId.description}
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
                     ></textarea>
                   </div>
                   <div className="mb-4">
@@ -79,7 +115,8 @@ const EditProductMain = (props) => {
                     <input
                       className="form-control"
                       type="text"
-                      value={productId.image}
+                      value={image}
+                      onChange={(e) => setImage(e.target.value)}
                     />
                   </div>
                 </div>
