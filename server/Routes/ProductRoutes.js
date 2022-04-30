@@ -146,7 +146,7 @@ productRoute.post(
 );
 
 
-// EDIT PRODUCT
+// UPDATE PRODUCT
 productRoute.put(
   "/:id",
   protect,

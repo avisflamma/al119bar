@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Product from "./Product";
-import products from "./../../data/Products";
 import { listProducts } from "../../Redux/Actions/ProductActions";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../LoadingError/Loading";
