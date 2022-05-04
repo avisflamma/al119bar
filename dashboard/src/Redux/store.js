@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { userLoginReducer , userListReducer } from "./Reducers/userReducers";
 import { productCreateReducer, productDeleteReducer, productEditReducer, productListReducer, productUpdateReducer } from "./Reducers/ProductReducers";
+import { orderListReducer } from "./Reducers/OrderReducres";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -11,7 +12,8 @@ const reducer = combineReducers({
   productDelete: productDeleteReducer,
   productCreate: productCreateReducer,
   productEdit: productEditReducer,
-  productUpdate: productUpdateReducer
+  productUpdate: productUpdateReducer,
+  orderList : orderListReducer
 });
 
 // login
