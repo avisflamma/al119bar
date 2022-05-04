@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { listOrders } from "../../Redux/Actions/OrderActions";
+import React from "react";
+import { useSelector } from "react-redux";
 import Message from "../LoadingError/Error";
 import Loading from "../LoadingError/Loading";
 import Orders from "./Orders";

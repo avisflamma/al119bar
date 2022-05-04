@@ -6,7 +6,6 @@ import {
     ORDER_DETAILS_REQUEST,
     ORDER_DETAILS_SUCCESS
 } from "../Constants/OrderConstants";
-import { USER_LOGOUT } from "../Constants/UserContants";
 import axios from "axios";
 import { logout } from "./userActions";
 
