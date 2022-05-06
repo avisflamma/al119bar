@@ -4,8 +4,8 @@ import moment from "moment";
 
 const Orders = (props) => {
 
-  const orders = props.orders;
-
+  const { orders } = props;
+  
   return (
     <table className="table">
       <thead>
