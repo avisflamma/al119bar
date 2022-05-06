@@ -3,7 +3,7 @@ import OrderDetailProducts from "./OrderDetailProducts";
 import OrderDetailInfo from "./OrderDetailInfo";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrderDetails } from "../../Redux/Actions/OrderActions";
+import { deliverOrder, getOrderDetails } from "../../Redux/Actions/OrderActions";
 import Loading from "../LoadingError/Loading";
 import Message from "../LoadingError/Error";
 import moment from "moment";
@@ -17,9 +17,16 @@ const OrderDetailmain = (props) => {
   const orderDetails = useSelector((state) => state.orderDetails);
   const { loading, error, order} = orderDetails;
 
+  const orderDeliver = useSelector((state) => state.orderDeliver);
+  const { loading:loadingDelivered, success:successDelivered} = orderDeliver;
+
   useEffect(() => {
     dispatch(getOrderDetails(orderId));
-  },[dispatch, orderId]);
+  },[dispatch, orderId, successDelivered]);
+
+  const deliverHandler = () => {
+    dispatch(deliverOrder(order))
+  }
 
   return (
     <section className="content-main">
@@ -75,9 +82,24 @@ const OrderDetailmain = (props) => {
                 {/* Payment Info */}
                 <div className="col-lg-3">
                   <div className="box shadow-sm bg-light">
-                    <button className="btn btn-dark col-12">
-                      MARK AS DELIVERED
-                    </button>
+                    {
+                      order.isDelivered ? (
+                        <button className="btn btn-success col-12">
+                          DELIVERED AT {moment(order.isDeliveredAt).format("MMM Do YY")}
+                        </button>
+                      )
+                      :
+                      (
+                        <>
+                          {
+                            loadingDelivered && <Loading/>
+                          }
+                          <button className="btn btn-dark col-12" onClick={deliverHandler}>
+                            MARK AS DELIVERED
+                          </button>
+                        </>
+                      )
+                    }
                   </div>
                 </div>
               </div>

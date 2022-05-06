@@ -29,7 +29,7 @@ const OrderDetailProducts = (props) => {
       <tbody>
         {
           order.orderItems.map((item, index) => (
-            <tr>
+            <tr key={index}>
               <td>
                 <Link className="itemside" to="#">
                   <div className="left">
