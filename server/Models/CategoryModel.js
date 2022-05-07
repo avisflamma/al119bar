@@ -23,12 +23,13 @@ const categorySchema = mongoose.Schema(
         required: true,
         default: true,
     },
-    categoryName: { 
+    title: { 
         type: String, 
         required: true
     },
     categoryBanner: [categoryBannerSchema],
     categoryUrl: { type: String, required: true },
+    /* children: [Object] */
   },
   {
     timestamps: true,

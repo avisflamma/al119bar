@@ -35,7 +35,7 @@ export const listCategories = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/category/all`, config);
+    const { data } = await axios.get(`/api/categories/all`, config);
 
     dispatch({ type: CATEGORY_LIST_SUCCESS, payload: data });
 
@@ -69,7 +69,7 @@ export const deleteCategory = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/api/category/${id}`, config);
+    await axios.delete(`/api/categories/${id}`, config);
 
     dispatch({ type: CATEGORY_DELETE_SUCCESS });
 
@@ -90,7 +90,7 @@ export const deleteCategory = (id) => async (dispatch, getState) => {
 
 
 // CREATE CATEGORY
-export const createCategory = (name,price,description,image,countInStock) => async (dispatch, getState) => {
+export const createCategory = (isEnabled,title,categoryBanner,categoryUrl) => async (dispatch, getState) => {
   try {
     dispatch({ type: CATEGORY_CREATE_REQUEST });
 
@@ -104,7 +104,7 @@ export const createCategory = (name,price,description,image,countInStock) => asy
       },
     };
 
-    const { data } = await axios.post(`/api/category/`,{isEnabled,categoryName,categoryBanner,categoryUrl}, config);
+    const { data } = await axios.post(`/api/categories/`,{isEnabled,title,categoryBanner,categoryUrl}, config);
 
     dispatch({ type: CATEGORY_CREATE_SUCCESS, payload: data });
 
@@ -128,7 +128,7 @@ export const createCategory = (name,price,description,image,countInStock) => asy
 export const editCategory = (id) => async (dispatch) => {
   try {
     dispatch({ type: CATEGORY_EDIT_REQUEST });
-    const { data } = await axios.get(`/api/category/${id}`);
+    const { data } = await axios.get(`/api/categories/${id}`);
     dispatch({ type: CATEGORY_EDIT_SUCCESS, payload: data });
   } catch (error) {
     const message =
@@ -165,7 +165,7 @@ export const updateCategory =
       };
 
       const { data } = await axios.put(
-        `/api/category/${category._id}`,
+        `/api/categories/${category._id}`,
         category, 
         config
       );
