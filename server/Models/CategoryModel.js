@@ -20,7 +20,6 @@ const categorySchema = mongoose.Schema(
   {
     isEnabled: {
         type: Boolean,
-        required: true,
         default: true,
     },
     title: { 
@@ -28,8 +27,9 @@ const categorySchema = mongoose.Schema(
         required: true
     },
     categoryBanner: [categoryBannerSchema],
-    categoryUrl: { type: String, required: true },
-    /* children: [Object] */
+    categoryUrl: { 
+        type: String
+    },
   },
   {
     timestamps: true,

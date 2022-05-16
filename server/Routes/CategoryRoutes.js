@@ -58,15 +58,15 @@ categoryRoute.post(
   protect,
   admin,
   asyncHandler(async (req, res) => {
-    const {isEnabled,categoryName,categoryBanner,categoryUrl} = req.body;
-    const categoryExist = await Category.findOne({name});
+    const {isEnabled,title,categoryBanner,categoryUrl} = req.body;
+    const categoryExist = await Category.findOne({title});
     if (categoryExist) {
       res.status(400);
       res.json({message: "Category name already exists"})
     } else {
       const category = new Category({
         isEnabled,
-        categoryName,
+        title,
         categoryBanner,
         categoryUrl,
       })
@@ -88,11 +88,11 @@ categoryRoute.put(
   protect,
   admin,
   asyncHandler(async (req, res) => {
-    const {isEnabled,categoryName,categoryBanner,categoryUrl} = req.body;
+    const {isEnabled,title,categoryBanner,categoryUrl} = req.body;
     const category = await Category.findById(req.params.id);
     if (category) {
         category.isEnabled = isEnabled || category.isEnabled;
-        category.categoryName = categoryName || category.categoryName;
+        category.title = title || category.title;
         category.categoryBanner = categoryBanner || category.categoryBanner;
         category.categoryUrl = categoryUrl || category.categoryUrl;      
 

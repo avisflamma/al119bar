@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import CreateCategory from "./CreateCategory";
 import CategoriesTable from "./CategoriesTable";
 
 const MainCategories = () => {
+
+  const [categoryIdSelected, setCategoryIdSelected] = useState("");
+
+
+
   return (
     <section className="content-main">
       <div className="content-header">
@@ -12,10 +17,11 @@ const MainCategories = () => {
       <div className="card shadow-sm">
         <div className="card-body">
           <div className="row">
-            {/* Create category */}
-            <CreateCategory />
-            {/* Categories table */}
-            <CategoriesTable />
+              <CategoriesTable setCategoryIdSelected={setCategoryIdSelected}/>
+              {/* Create category */}
+              {
+                <CreateCategory categoryIdSelected={categoryIdSelected} setCategoryIdSelected={setCategoryIdSelected}/>
+              }
           </div>
         </div>
       </div>
