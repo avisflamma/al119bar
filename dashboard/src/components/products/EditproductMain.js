@@ -159,6 +159,7 @@ const EditProductMain = (props) => {
                             value={image}
                             onChange={(e) => setImage(e.target.value)}
                           />
+                          <img src={image} alt="Product" />
                         </div>
                       </>
                     )

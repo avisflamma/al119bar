@@ -4,46 +4,53 @@ import { useDispatch } from "react-redux";
 import { deleteProduct } from "../../Redux/Actions/ProductActions";
 
 const Product = (props) => {
-  const { product } = props;
 
-  const dispatch = useDispatch();
-  const deleteHandler = (id) => {
-    if(window.confirm("Are you sure??")){
-      dispatch(deleteProduct(id));
+
+    const product  = props.product;
+
+    const dispatch = useDispatch();
+    const deleteHandler = (id) => {
+        if(window.confirm("Are you sure??")){
+        dispatch(deleteProduct(id));
+        }
     }
-  }
-  return (
-    <>
-      <div className="col-md-6 col-sm-6 col-lg-3 mb-5">
-        <div className="card card-product-grid shadow-sm">
-          <Link to="#" className="img-wrap">
-            <img src={product.image} alt="Product" />
-          </Link>
-          <div className="info-wrap">
-            <Link to="#" className="title text-truncate">
-              {product.name}
-            </Link>
-            <div className="price mb-2">${product.price}</div>
-            <div className="row">
-              <Link
-                to={`/product/${product._id}/edit`}
-                className="btn btn-sm btn-outline-success p-2 pb-3 col-md-6"
-              >
-                <i className="fas fa-pen"></i>
-              </Link>
-              <Link
-                to="#"
-                className="btn btn-sm btn-outline-danger p-2 pb-3 col-md-6"
-                onClick={() => deleteHandler(product._id)}
-              >
-                <i className="fas fa-trash-alt"></i>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+
+    return (
+      <tbody>
+        <tr>
+          <td>{product._id}</td>
+          <td>
+              <b>{product.name}</b>
+          </td>
+          <td className="text-end">
+              <div className="dropdown">
+                  <Link
+                      to="#"
+                      data-bs-toggle="dropdown"
+                      className="btn btn-light"
+                  >
+                      <i className="fas fa-ellipsis-h"></i>
+                  </Link>
+                  <div className="dropdown-menu">        
+                    <Link
+                      to={`/product/${product._id}/edit`}
+                      className="dropdown-item"
+                    >
+                      Edit 
+                    </Link>
+                    <Link
+                      to="#"
+                      className="dropdown-item text-danger"
+                      onClick={() => deleteHandler(product._id)}
+                    >
+                      Delete
+                    </Link>
+                  </div>
+              </div>
+          </td>
+        </tr>
+      </tbody>
+    );
 };
 
 export default Product;

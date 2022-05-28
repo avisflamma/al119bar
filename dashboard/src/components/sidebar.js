@@ -44,7 +44,7 @@ const Sidebar = () => {
                 <span className="text">Products</span>
               </NavLink>
             </li>
-            <li className="menu-item">
+            {/* <li className="menu-item">
               <NavLink
                 activeClassName="active"
                 className="menu-link"
@@ -53,12 +53,12 @@ const Sidebar = () => {
                 <i className="icon fas fa-cart-plus"></i>
                 <span className="text">Add product</span>
               </NavLink>
-            </li>
+            </li> */}
             <li className="menu-item">
               <NavLink
                 activeClassName="active"
                 className="menu-link"
-                to="/category"
+                to="/categories"
               >
                 <i className="icon fas fa-list"></i>
                 <span className="text">Categories</span>

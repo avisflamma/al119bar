@@ -67,9 +67,20 @@ const MainProducts = () => {
             (
               <div className="row">
                 {/* Products */}
-                {products.map((product) => (
-                  <Product product={product} key={product._id} />
-                ))}
+                <table className="table">
+                    <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th className="text-end">Action</th>
+                        </tr>
+                    </thead>
+                  </table>
+                  <table>
+                      {products.map((product) => (
+                        <Product product={product} key={product._id} />
+                      ))}
+                  </table>
               </div>
             )
           }

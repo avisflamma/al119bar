@@ -107,6 +107,9 @@ export const createCategory = (isEnabled,title,categoryBanner,categoryUrl) => as
     const { data } = await axios.post(`/api/categories/`,{isEnabled,title,categoryBanner,categoryUrl}, config);
 
     dispatch({ type: CATEGORY_CREATE_SUCCESS, payload: data });
+    dispatch(editCategory(data._id));
+    dispatch(listCategories());
+
 
   } catch (error) {
     const message =
@@ -130,6 +133,7 @@ export const editCategory = (id) => async (dispatch) => {
     dispatch({ type: CATEGORY_EDIT_REQUEST });
     const { data } = await axios.get(`/api/categories/${id}`);
     dispatch({ type: CATEGORY_EDIT_SUCCESS, payload: data });
+
   } catch (error) {
     const message =
       error.response && error.response.data.message
@@ -172,6 +176,7 @@ export const updateCategory =
 
       dispatch({ type: CATEGORY_UPDATE_SUCCESS, payload: data });
       dispatch({ type: CATEGORY_EDIT_SUCCESS, payload: data });
+      dispatch(listCategories());
 
     } catch (error) {
       const message =

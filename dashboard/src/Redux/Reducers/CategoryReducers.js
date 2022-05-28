@@ -53,7 +53,7 @@ export const categoryCreateReducer = (state = {}, action) => {
     case CATEGORY_CREATE_REQUEST:
       return { loading: true};
     case CATEGORY_CREATE_SUCCESS:
-      return { loading: false, success: true, category:action.payload };
+      return { loading: false, success: true, categoryCreated : action.payload };
     case CATEGORY_CREATE_FAIL:
       return { loading: false, error: action.payload };
     case CATEGORY_CREATE_RESET:
@@ -74,7 +74,7 @@ export const categoryEditReducer = (
     case CATEGORY_EDIT_REQUEST:
       return { ...state, loading: true };
     case CATEGORY_EDIT_SUCCESS:
-      return { loading: false, category: action.payload };
+      return { loading: false, categoryRetriever: action.payload };
     case CATEGORY_EDIT_FAIL:
       return { loading: false, error: action.payload };
     default:
